@@ -18,3 +18,12 @@ class ModelTests(TestCase):
         user = sample_user()
         self.assertEqual(user.username, username)
         self.assertTrue(user.check_password(password))
+
+    def test_host_str(self):
+        """Test the host string representation"""
+        host = models.Host.objects.create(
+            user=sample_user(),
+            BudgetAmount=15.5,
+            name='Tim'
+        )
+        self.assertEqual(str(host), host.name)
