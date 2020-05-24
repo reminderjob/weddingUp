@@ -10,6 +10,14 @@ def sample_user(username='user', password='password'):
         username=username, password=password)
 
 
+def sample_host(name="Joe", BudgetAmount=16.6):
+    """Create a sample Host"""
+    user = sample_user()
+    return models.Host.objects.create(name=name,
+                                      BudgetAmount=BudgetAmount,
+                                      user=user)
+
+
 class ModelTests(TestCase):
     def test_create_user_successful(self):
         """Test creating a new user is successful"""
@@ -27,3 +35,14 @@ class ModelTests(TestCase):
             name='Tim'
         )
         self.assertEqual(str(host), host.name)
+
+    def test_guest_str(self):
+        """Test the Guest string representation"""
+        guest = models.Guest.objects.create(
+            the_host=sample_host(),
+            name="john",
+            guest_email="test@example.com",
+            is_coming=True,
+            angbao=10.5
+        )
+        self.assertEqual(str(guest), guest.name)

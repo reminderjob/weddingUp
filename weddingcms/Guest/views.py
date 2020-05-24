@@ -1,7 +1,6 @@
 from rest_framework import viewsets, mixins
 from Guest import serializers
-from core.models import Guest
-from django.contrib.auth import get_user_model
+from core.models import Guest, Host
 
 
 class GuestViewSet(viewsets.GenericViewSet,
@@ -13,6 +12,9 @@ class GuestViewSet(viewsets.GenericViewSet,
     http_method_names = ['post']
 
     def perform_create(self, serializer):
-        """Create a new object"""
-        user = get_user_model().objects.get(id=self.request.data['user'])
-        serializer.save(user=user)
+        """Create a new Guest object"""
+        user_exists = Host.objects.filter(
+            id=self.request.data['the_host']).exists()
+        if (user_exists):
+            user = Host.objects.get(id=self.request.data['the_host'])
+            serializer.save(the_host=user)
