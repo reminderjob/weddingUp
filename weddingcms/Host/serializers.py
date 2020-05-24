@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from core.models import Host
+from core.models import Host, SiteContent
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -8,7 +8,10 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('username', 'password')
-        extra_kwargs = {'password': {'write_only': True, 'min_length': 5}}
+        extra_kwargs = {'password': {'write_only': True,
+                                     'min_length': 5,
+                                     'style': {'input_type': 'password'},
+                                     'trim_whitespace': False}}
 
 
 class HostSerializer(serializers.ModelSerializer):
@@ -29,3 +32,20 @@ class HostSerializer(serializers.ModelSerializer):
         the_host = Host.objects.create(
             user=user, name=name, BudgetAmount=BudgetAmount)
         return the_host
+
+
+class ContentPublicSerializer(serializers.ModelSerializer):
+    """Serializer for host object"""
+    class Meta:
+        model = SiteContent
+        fields = '__all__'
+        read_only_Fields = '__all__'
+
+
+class ContentPrivateSerializer(serializers.ModelSerializer):
+    """Serializer for host object"""
+    class Meta:
+        model = SiteContent
+        fields = '__all__'
+        read_only_Fields = ('id',)
+        extra_kwargs = {'the_date': {'format': '%d-%m-%Y'}}

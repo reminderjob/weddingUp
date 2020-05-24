@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from tinymce.models import HTMLField
 import uuid
 
 # Create your models here.
@@ -20,9 +19,12 @@ class Host(models.Model):
 
 class SiteContent(models.Model):
     name = models.CharField(max_length=255)
-    Description = models.TextField('description')
+    venue_name = models.CharField(max_length=255)
+    schedule_reception = models.TextField(blank=True)
+    schedule_meal = models.TextField(blank=True)
+    directions_car = models.TextField(blank=True)
+    directions_taxi = models.TextField(blank=True)
     the_date = models.DateTimeField('wedding_date')
-    Directions = HTMLField()
     the_host = models.ForeignKey(Host, on_delete=models.CASCADE)
     objects = models.Manager()
 
