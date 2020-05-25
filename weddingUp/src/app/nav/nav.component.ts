@@ -17,6 +17,8 @@ export class NavComponent implements OnInit {
 
   select(activeTab){
     this.activeTab = activeTab;
+    const el = document.getElementById(activeTab);
+    el.scrollIntoView({ behavior: "smooth" });
   }
 
   // loadPage() {
