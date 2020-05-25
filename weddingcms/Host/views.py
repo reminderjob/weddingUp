@@ -24,7 +24,7 @@ class ContentPublicViewSet(viewsets.GenericViewSet,
     http_method_names = ['get']
 
     def get_queryset(self):
-        """Retrieve the recipes for the authenitcated user"""
+        """Retrieve the siteContent with params the_host"""
         the_host = self.request.query_params.get('the_host')
         if the_host is None:
             self.queryset = SiteContent.objects.none()
