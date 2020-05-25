@@ -1,22 +1,26 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Dating App</a>
-  <div class="container">
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Matches</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Lists</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Messages</a>
-    </li>
-  </ul>
-  <div>
-  <a class="text-light">
-      Welcome User
-    </a>
-  </div>
-  </div>
-  </nav>
-  
+<nav ngxNavbarDynamicExpand class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" (click)="collapse.toggle()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <ngx-navbar-collapse #collapse="ngxNavbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item " [ngClass]="{ 'active':activeTab==='Welcome'}" (click)="select('Welcome')">
+        <a class="nav-link" href="#">Welcome <i class="fa fa-heart" style="color:red;"></i></a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active':activeTab==='Schedule'}" (click)="select('Schedule')">
+        <a class="nav-link" href="#">Schedule <i class="fa fa-calendar"></i></a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active':activeTab==='Getting there'}" (click)="select('Getting there')">
+        <a class="nav-link" href="#">Getting there <i class="fa fa-map" style="color:orange;"></i></a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active':activeTab==='Photos'}" (click)="select('Photos')">
+        <a class="nav-link" href="#">Photos <i class="fa fa-image"></i></a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active':activeTab==='RVSP'}" (click)="select('RVSP')">
+        <a class="nav-link" href="#">RVSP <i class="fa fa-user-plus"></i></a>
+      </li>
+    </ul>
+  </ngx-navbar-collapse>
+</nav>

@@ -9,10 +9,15 @@ import { Content } from '../_models/content';
 export class NavComponent implements OnInit {
   contents: Content[];
   content: Content;
+  activeTab = 'Welcome';
 
   constructor() {}
 
   ngOnInit() {}
+
+  select(activeTab){
+    this.activeTab = activeTab;
+  }
 
   // loadPage() {
   //   this.contentService

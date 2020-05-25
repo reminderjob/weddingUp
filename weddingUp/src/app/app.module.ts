@@ -13,6 +13,7 @@ import { appRoutes } from './routes';
 import { ContentResolver } from './_resolvers/content.resolver';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 import { CountdownModule } from 'ng2-date-countdown';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CountdownModule } from 'ng2-date-countdown';
       HttpClientModule,
       RouterModule.forRoot(appRoutes),
       BrowserAnimationsModule,
+      NgxNavbarModule,
       CountdownModule,
    ],
    providers: [
