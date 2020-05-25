@@ -1,4 +1,5 @@
 from rest_framework import viewsets, mixins, permissions
+from django_filters.rest_framework import DjangoFilterBackend
 from Host import serializers
 from core.models import Host, SiteContent
 
@@ -18,15 +19,9 @@ class ContentPublicViewSet(viewsets.GenericViewSet,
     """ Viewset for Guest after submit """
     serializer_class = serializers.ContentPublicSerializer
     queryset = SiteContent.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['the_host']
     http_method_names = ['get']
-
-    def get_queryset(self):
-        """Return objects for the current host_id only"""
-        the_host = self.request.query_params.get('the_host')
-        queryset = self.queryset
-        if (the_host):
-            queryset = queryset.filter(the_host=the_host)
-        return queryset.order_by('-the_host')
 
 
 class ContentPrivateViewSet(viewsets.GenericViewSet,

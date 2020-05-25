@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'django_extensions',
+    'django_filters',
     'core',
     'Auth',
     'Guest',
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -76,6 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'weddingcms.wsgi.application'
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -110,12 +114,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
