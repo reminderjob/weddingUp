@@ -23,6 +23,13 @@ class ContentPublicViewSet(viewsets.GenericViewSet,
     filterset_fields = ['the_host']
     http_method_names = ['get']
 
+    def get_queryset(self):
+        """Retrieve the recipes for the authenitcated user"""
+        the_host = self.request.query_params.get('the_host')
+        if the_host is None:
+            self.queryset = SiteContent.objects.none()
+        return self.queryset
+
 
 class ContentPrivateViewSet(viewsets.GenericViewSet,
                             mixins.UpdateModelMixin,
