@@ -15,12 +15,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 import { CountdownModule } from 'ng2-date-countdown';
+import { NothingComponent } from './nothing/nothing.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       HomeComponent,
-      NavComponent
+      NavComponent,
+      NothingComponent
    ],
    imports: [
       BrowserModule,
@@ -28,13 +30,13 @@ import { CountdownModule } from 'ng2-date-countdown';
       RouterModule.forRoot(appRoutes),
       BrowserAnimationsModule,
       NgxNavbarModule,
-      CountdownModule,
+      CountdownModule
    ],
    providers: [
-     AuthService,
-     ContentService,
-     ContentResolver,
-     DatePipe,
+      AuthService,
+      ContentService,
+      ContentResolver,
+      DatePipe
    ],
    bootstrap: [
       AppComponent
