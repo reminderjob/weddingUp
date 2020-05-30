@@ -4,14 +4,13 @@ from Host import serializers
 from core.models import Host, SiteContent
 
 
-class HostViewSet(viewsets.GenericViewSet,
+class HostPublicCreateViewSet(viewsets.GenericViewSet,
                   mixins.ListModelMixin,
                   mixins.CreateModelMixin):
     """ Viewset for Guest after submit """
-    serializer_class = serializers.HostSerializer
+    serializer_class = serializers.HostCreateSerializer
     queryset = Host.objects.all()
     http_method_names = ['post']
-
 
 class ContentPublicViewSet(viewsets.GenericViewSet,
                            mixins.ListModelMixin,
@@ -39,3 +38,22 @@ class ContentPrivateViewSet(viewsets.GenericViewSet,
     permission_classes = (permissions.IsAuthenticated,)
     queryset = SiteContent.objects.all()
     http_method_names = ['post', 'put', 'patch']
+
+
+class HostPrivateViewSet(viewsets.GenericViewSet,
+                  mixins.ListModelMixin,
+                  mixins.CreateModelMixin):
+    """ Viewset for Guest after submit """
+    serializer_class = serializers.HostSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Host.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name']
+    http_method_names = ['get']
+
+    def get_queryset(self):
+        """Retrieve the siteContent with params the_host"""
+        the_host = self.request.query_params.get('name')
+        if the_host is None:
+            self.queryset = SiteContent.objects.none()
+        return self.queryset

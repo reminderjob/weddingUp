@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
                                      'trim_whitespace': False}}
 
 
-class HostSerializer(serializers.ModelSerializer):
+class HostCreateSerializer(serializers.ModelSerializer):
     """Serializer for host object"""
     user = UserSerializer()
 
@@ -42,6 +42,8 @@ class ContentPublicSerializer(serializers.ModelSerializer):
         read_only_Fields = '__all__'
 
 
+# private serializers
+
 class ContentPrivateSerializer(serializers.ModelSerializer):
     """Serializer for host object"""
     class Meta:
@@ -49,3 +51,10 @@ class ContentPrivateSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_Fields = ('id',)
         extra_kwargs = {'the_date': {'format': '%d-%m-%Y'}}
+
+class HostSerializer(serializers.ModelSerializer):
+    """Serializer for host object"""
+    class Meta:
+        model = Host
+        fields = ('id', 'name', 'BudgetAmount','expenses',)
+        read_only_Fields = ('id',)
