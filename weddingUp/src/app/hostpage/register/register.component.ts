@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
-import { AlertifyService } from '../_services/alertify.service';
+import { AuthService } from '../../_services/auth.service';
+import { AlertifyService } from '../../_services/alertify.service';
 import {
   FormGroup,
   FormControl,
@@ -58,7 +58,6 @@ export class RegisterComponent implements OnInit {
           this.alertify.success('registration successful');
         },
         (error) => {
-          console.log(error);
           this.alertify.error(error);
         },
         () => {

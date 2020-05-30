@@ -19,11 +19,11 @@ import { CountdownModule } from 'ng2-date-countdown';
 import { UserIdleModule } from 'angular-user-idle';
 
 import { NothingComponent } from './nothing/nothing.component';
-import { RegisterComponent } from './register/register.component';
-import { HostComponent } from './host/host.component';
-import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './hostpage/register/register.component';
+import { HostComponent } from './hostpage/host/host.component';
+import { LoginComponent } from './hostpage/login/login.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { HostadminComponent } from './hostadmin/hostadmin.component';
+import { HostadminComponent } from './hostadminpage/hostadmin/hostadmin.component';
 
 @NgModule({
    declarations: [
