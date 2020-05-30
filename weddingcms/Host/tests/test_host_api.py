@@ -46,7 +46,7 @@ class PublicHostApiTests(TestCase):
             name=payload['user']['username']
         ).exists()
         self.assertTrue(host_exists)
-    
+
     def test_login_required_upload(self):
         """Test authentication is required to get host data"""
         params = {

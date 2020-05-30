@@ -8,7 +8,7 @@ router.register('create', views.HostPublicCreateViewSet)
 router.register('public_content', views.ContentPublicViewSet)
 router.register('private_content', views.ContentPrivateViewSet,
                 basename='private_content')
-router.register('find_host', views.HostPrivateViewSet,basename='find_host')             
+router.register('find_host', views.HostPrivateViewSet, basename='find_host')
 
 app_name = 'host'
 

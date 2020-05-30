@@ -52,9 +52,10 @@ class ContentPrivateSerializer(serializers.ModelSerializer):
         read_only_Fields = ('id',)
         extra_kwargs = {'the_date': {'format': '%d-%m-%Y'}}
 
+
 class HostSerializer(serializers.ModelSerializer):
     """Serializer for host object"""
     class Meta:
         model = Host
-        fields = ('id', 'name', 'BudgetAmount','expenses',)
+        fields = ('id', 'name', 'BudgetAmount', 'expenses',)
         read_only_Fields = ('id',)

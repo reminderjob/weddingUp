@@ -5,12 +5,13 @@ from core.models import Host, SiteContent
 
 
 class HostPublicCreateViewSet(viewsets.GenericViewSet,
-                  mixins.ListModelMixin,
-                  mixins.CreateModelMixin):
+                              mixins.ListModelMixin,
+                              mixins.CreateModelMixin):
     """ Viewset for Guest after submit """
     serializer_class = serializers.HostCreateSerializer
     queryset = Host.objects.all()
     http_method_names = ['post']
+
 
 class ContentPublicViewSet(viewsets.GenericViewSet,
                            mixins.ListModelMixin,
@@ -41,8 +42,8 @@ class ContentPrivateViewSet(viewsets.GenericViewSet,
 
 
 class HostPrivateViewSet(viewsets.GenericViewSet,
-                  mixins.ListModelMixin,
-                  mixins.CreateModelMixin):
+                         mixins.ListModelMixin,
+                         mixins.CreateModelMixin):
     """ Viewset for Guest after submit """
     serializer_class = serializers.HostSerializer
     permission_classes = (permissions.IsAuthenticated,)
