@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
-import { Host } from '../_models/host';
 import {
   FormGroup,
   FormControl,
@@ -16,7 +15,7 @@ import {
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
-  host: Host;
+  host: any = {};
   registerForm: FormGroup;
 
   constructor(
@@ -52,10 +51,9 @@ export class RegisterComponent implements OnInit {
       let user = {};
       user['username'] = this.registerForm.get('username').value;
       user['password'] = this.registerForm.get('password').value;
-      let theHost = {};
-      theHost['user'] = user;
-      theHost['BudgetAmount'] = this.registerForm.get('budgetAmount').value;
-      this.authService.register(theHost).subscribe(
+      this.host['user'] = user;
+      this.host['BudgetAmount'] = this.registerForm.get('budgetAmount').value;
+      this.authService.register(this.host).subscribe(
         () => {
           this.alertify.success('registration successful');
         },

@@ -6,13 +6,22 @@ import * as alertify from 'alertifyjs';
 export class AlertifyService {
   constructor() {}
 
-  confirm(message: string, okCallBack: () => any) {
-    alertify.confirm(message, (e: any) => {
-      if (e) {
-        okCallBack();
-      } else {
+  confirm(message: string, okCallBack: () => any, notOkCallBack: () => any) {
+    alertify.confirm(
+      message,
+      (e: any) => {
+        if (e) {
+          okCallBack();
+        } else {
+        }
+      },
+      (e: any) => {
+        if (e) {
+          notOkCallBack();
+        } else {
+        }
       }
-    });
+    );
   }
 
   success(message: string) {

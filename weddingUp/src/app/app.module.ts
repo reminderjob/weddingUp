@@ -16,11 +16,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 import { CountdownModule } from 'ng2-date-countdown';
+import { UserIdleModule } from 'angular-user-idle';
+
 import { NothingComponent } from './nothing/nothing.component';
 import { RegisterComponent } from './register/register.component';
 import { HostComponent } from './host/host.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { HostadminComponent } from './hostadmin/hostadmin.component';
 
 @NgModule({
    declarations: [
@@ -30,17 +33,19 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
       NothingComponent,
       RegisterComponent,
       HostComponent,
-      LoginComponent
+      LoginComponent,
+      HostadminComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
-      ReactiveFormsModule ,
+      ReactiveFormsModule,
       RouterModule.forRoot(appRoutes),
       BrowserAnimationsModule,
       NgxNavbarModule,
-      CountdownModule
+      CountdownModule,
+      UserIdleModule.forRoot({idle: 600, timeout: 60, ping: 120})
    ],
    providers: [
       AuthService,
