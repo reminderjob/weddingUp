@@ -1,0 +1,7 @@
+.navbar-nav .active>.nav-link {
+    color: lightseagreen;
+}
+
+.navbar {
+    cursor: default;
+}
