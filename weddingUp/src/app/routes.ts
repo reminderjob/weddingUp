@@ -5,6 +5,7 @@ import { NothingComponent } from './nothing/nothing.component';
 import { HostComponent } from './hostpage/host/host.component';
 import { HostadminComponent } from './hostadminpage/hostadmin/hostadmin.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { HostResolver } from './_resolvers/host.resolver';
 
 export const appRoutes: Routes = [
   {
@@ -21,6 +22,7 @@ export const appRoutes: Routes = [
       {
         path: '',
         component: HostadminComponent,
+        resolve: {host: HostResolver}
       }
     ],
   },

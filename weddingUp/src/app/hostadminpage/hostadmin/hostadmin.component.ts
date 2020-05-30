@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../../_services/alertify.service';
 import { UserIdleService } from 'angular-user-idle';
+import { Host } from '../../_models/host';
 
 @Component({
   selector: 'app-hostadmin',
@@ -10,19 +11,23 @@ import { UserIdleService } from 'angular-user-idle';
   styleUrls: ['./hostadmin.component.css'],
 })
 export class HostadminComponent implements OnInit {
+  host: Host;
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private alertify: AlertifyService,
-    private userIdle: UserIdleService
+    private userIdle: UserIdleService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.refreshTokenTime();
-
+    this.route.data.subscribe((data) => {
+      this.host = data['host'][0];
+    });
+    this.tracking();
   }
-
-  refreshTokenTime(){
+  tracking(){
     this.userIdle.startWatching();
     // Start watching when user idle is starting.
     this.userIdle.onTimerStart().subscribe();
@@ -57,8 +62,10 @@ export class HostadminComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     localStorage.removeItem('refresh');
     this.alertify.message('logged out');
     this.router.navigate(['/host']);
   }
+
 }

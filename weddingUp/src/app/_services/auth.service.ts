@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 export class AuthService {
   baseUrl = environment.apiUrl;
   jwtHelper = new JwtHelperService();
+  decodedToken: any;
 
   constructor(private http: HttpClient) {}
 
@@ -18,6 +19,8 @@ export class AuthService {
       map((response: any) => {
         const host = response;
         if (host) {
+          this.decodedToken = this.jwtHelper.decodeToken(host.access);
+          localStorage.setItem('username',this.decodedToken['username']);
           localStorage.setItem('token', host.access);
           localStorage.setItem('refresh', host.refresh);
         }
@@ -25,9 +28,9 @@ export class AuthService {
     );
   }
 
-  refresh(){
-    const payload = {'refresh': localStorage.getItem('refresh')};
-    return this.http.post(this.baseUrl + 'auth/refresh/',payload ).pipe(
+  refresh() {
+    const payload = { refresh: localStorage.getItem('refresh') };
+    return this.http.post(this.baseUrl + 'auth/refresh/', payload).pipe(
       map((response: any) => {
         const host = response;
         if (host) {

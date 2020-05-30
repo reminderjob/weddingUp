@@ -12,6 +12,7 @@ import { AuthService } from './_services/auth.service';
 import { ContentService } from './_services/content.service';
 import { appRoutes } from './routes';
 import { ContentResolver } from './_resolvers/content.resolver';
+import { HostResolver } from './_resolvers/host.resolver';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
@@ -24,6 +25,11 @@ import { HostComponent } from './hostpage/host/host.component';
 import { LoginComponent } from './hostpage/login/login.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { HostadminComponent } from './hostadminpage/hostadmin/hostadmin.component';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+   return localStorage.getItem('token');
+ }
 
 @NgModule({
    declarations: [
@@ -45,12 +51,20 @@ import { HostadminComponent } from './hostadminpage/hostadmin/hostadmin.componen
       BrowserAnimationsModule,
       NgxNavbarModule,
       CountdownModule,
-      UserIdleModule.forRoot({idle: 600, timeout: 60, ping: 120})
+      UserIdleModule.forRoot({idle: 600, timeout: 60, ping: 120}),
+      JwtModule.forRoot({
+         config: {
+           tokenGetter,
+           whitelistedDomains: ['localhost:8000'],
+           blacklistedRoutes: ['localhost:8000/api/auth'],
+         },
+       })
    ],
    providers: [
       AuthService,
       ContentService,
       ContentResolver,
+      HostResolver,
       DatePipe,
       ErrorInterceptorProvider
    ],

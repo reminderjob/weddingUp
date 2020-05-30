@@ -2,7 +2,7 @@ import { Expenses } from './expenses';
 
 export interface Host {
   id: string;
-  username: string;
+  name: string;
   BudgetAmount: number;
   expenses?: Expenses;
 }
