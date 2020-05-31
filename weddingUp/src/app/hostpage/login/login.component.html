@@ -1,29 +1,59 @@
-<form
-      #loginForm="ngForm"
-      class="form"
-      (ngSubmit)="login()"
-    >
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <h2 class="text-center text-primary">Login</h2>
+  <hr />
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
       <input
-        class="form-control"
-        required
-        name="username"
+        matInput
         type="text"
-        placeholder="Username"
-        [(ngModel)]="model.username"
-      />
-      <input
-        class="form-control"
         required
-        name="password"
-        type="password"
-        placeholder="Password"
-        [(ngModel)]="model.password"
+        [ngClass]="{
+          'is-invalid':
+            loginForm.get('username').errors &&
+            loginForm.get('username').touched
+        }"
+        formControlName="username"
+        class="form-control no-border"
+        placeholder="Username"
       />
-      <button
-        [disabled]="!loginForm.valid"
-        class="btn btn-success my-2 my-sm-0"
-        type="submit"
+      <mat-error
+        *ngIf="
+          loginForm.get('username').errors && loginForm.get('username').touched
+        "
       >
-        Login
-      </button>
-    </form>
+        username is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        required
+        [ngClass]="{
+          'is-invalid':
+            loginForm.get('password').errors &&
+            loginForm.get('password').touched
+        }"
+        class="form-control no-border"
+        formControlName="password"
+        placeholder="Password"
+      />
+      <mat-error
+        *ngIf="
+          loginForm.get('password').errors && loginForm.get('password').touched
+        "
+      >
+        password is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-group text-center">
+    <button mat-raised-button color="primary" [disabled]="!loginForm.valid" type="submit">
+      Login
+    </button>
+  </div>
+</form>

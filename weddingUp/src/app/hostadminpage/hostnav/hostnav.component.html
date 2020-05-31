@@ -1,0 +1,38 @@
+<nav
+  ngxNavbarDynamicExpand
+  class="navbar navbar-expand-md navbar-light bg-light p-2"
+>
+  <a class="navbar-brand">Navbar</a>
+  <button
+    class="navbar-toggler"
+    mat-icon-button
+    color="accent"
+    (click)="collapse.toggle()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <ngx-navbar-collapse #collapse="ngxNavbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li
+        class="nav-item"
+        [ngClass]="{ active: activeTab === 'DashBoard' }"
+        (click)="select('DashBoard')"
+      >
+        <a class="nav-link"
+          >Welcome {{ host.name }}<i class="fa fa-heart" style="color: red;"></i
+        ></a>
+      </li>
+      <li
+        class="nav-item"
+        [ngClass]="{ active: activeTab === 'Content' }"
+        (click)="select('Content')"
+      >
+        <a class="nav-link"
+          >Content<i class="fa fa-heart" style="color: red;"></i
+        ></a>
+      </li>
+    </ul>
+    <button class="btn btn-primary" (click)="logout()">Logout</button>
+  </ngx-navbar-collapse>
+</nav>

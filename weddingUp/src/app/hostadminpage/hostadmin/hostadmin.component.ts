@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertifyService } from '../../_services/alertify.service';
 import { UserIdleService } from 'angular-user-idle';
 import { Host } from '../../_models/host';
+import { HostService } from 'src/app/_services/host.service';
 
 @Component({
   selector: 'app-hostadmin',
@@ -11,23 +12,22 @@ import { Host } from '../../_models/host';
   styleUrls: ['./hostadmin.component.css'],
 })
 export class HostadminComponent implements OnInit {
-  host: Host;
+  host: Host = JSON.parse(localStorage.getItem('host'));
+  activeTab: string = 'DashBoard';
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private alertify: AlertifyService,
     private userIdle: UserIdleService,
-    private route: ActivatedRoute
+    private hostService: HostService
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe((data) => {
-      this.host = data['host'][0];
-    });
     this.tracking();
   }
-  tracking(){
+
+  tracking() {
     this.userIdle.startWatching();
     // Start watching when user idle is starting.
     this.userIdle.onTimerStart().subscribe();
@@ -62,10 +62,15 @@ export class HostadminComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('username');
+    localStorage.removeItem('host');
     localStorage.removeItem('refresh');
+    this.authService.decodedToken = null;
+    this.hostService.currentHost = null;
     this.alertify.message('logged out');
     this.router.navigate(['/host']);
   }
 
+  currentActiveTab(activeTab: string) {
+    this.activeTab = activeTab;
+  }
 }

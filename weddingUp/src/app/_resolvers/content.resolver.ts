@@ -7,14 +7,14 @@ import { ContentService } from '../_services/content.service';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Injectable()
-export class ContentResolver implements Resolve<Content[]> {
+export class ContentResolver implements Resolve<Content> {
   constructor(
     private contentService: ContentService,
     private router: Router,
     private alertify: AlertifyService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Content[]> {
+  resolve(route: ActivatedRouteSnapshot): Observable<Content> {
     return this.contentService.loadPage(route.params['the_host']).pipe(
       catchError((error) => {
         this.alertify.error('Problem retrieving data');

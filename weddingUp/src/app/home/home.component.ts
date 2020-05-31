@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
-      this.content = data['contents'][0];
+      this.content = data['contents'];
     });
     this.latest_date = this.datepipe.transform(
       this.content.the_date,

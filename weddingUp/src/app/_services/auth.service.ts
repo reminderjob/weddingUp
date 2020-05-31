@@ -20,7 +20,6 @@ export class AuthService {
         const host = response;
         if (host) {
           this.decodedToken = this.jwtHelper.decodeToken(host.access);
-          localStorage.setItem('username',this.decodedToken['username']);
           localStorage.setItem('token', host.access);
           localStorage.setItem('refresh', host.refresh);
         }

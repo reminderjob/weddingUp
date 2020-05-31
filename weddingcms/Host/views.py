@@ -48,13 +48,8 @@ class HostPrivateViewSet(viewsets.GenericViewSet,
     serializer_class = serializers.HostSerializer
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Host.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['name']
     http_method_names = ['get']
 
     def get_queryset(self):
         """Retrieve the siteContent with params the_host"""
-        the_host = self.request.query_params.get('name')
-        if the_host is None:
-            self.queryset = SiteContent.objects.none()
-        return self.queryset
+        return self.queryset.filter(user=self.request.user)

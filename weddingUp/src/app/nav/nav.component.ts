@@ -20,16 +20,5 @@ export class NavComponent implements OnInit {
     const el = document.getElementById(activeTab);
     el.scrollIntoView({ behavior: "smooth" });
   }
-
-  // loadPage() {
-  //   this.contentService
-  //     .loadPage()
-  //     .subscribe(
-  //       (contents: Content[]) => {
-  //         this.content = contents[0];
-  //         console.log(this.content);
-  //       },
-  //       (error) => {}
-  //     );
-  // }
+  
 }

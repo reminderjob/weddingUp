@@ -1,10 +1,10 @@
 <nav
   ngxNavbarDynamicExpand
-  class="navbar navbar-expand-lg navbar-light bg-light"
+  class="navbar navbar-expand-md navbar-light bg-light p-2"
 >
   <a class="navbar-brand">Navbar</a>
-  <button class="navbar-toggler" type="button" (click)="collapse.toggle()">
-    <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" mat-icon-button color="accent" (click)="collapse.toggle()">
+      <mat-icon>menu</mat-icon>
   </button>
   <ngx-navbar-collapse #collapse="ngxNavbarCollapse">
     <ul class="navbar-nav mr-auto">
@@ -14,8 +14,8 @@
         (click)="select(false)"
       >
         <a class="nav-link"
-          >Login <i class="fa fa-heart" style="color: red;"></i
-        ></a>
+          >Login <i class="fa fa-sign-in"></i>
+        </a>
       </li>
       <li
         class="nav-item"
@@ -23,15 +23,14 @@
         (click)="select(true)"
       >
         <a class="nav-link"
-          >Register <i class="fa fa-heart" style="color: red;"></i
-        ></a>
+          >Register <i class="fa fa-user-plus"></i></a>
       </li>
     </ul>
   </ngx-navbar-collapse>
 </nav>
 <div *ngIf="registerMode" class="container">
   <div class="row justify-content-center">
-    <div class="col-4">
+    <div class="col-md-6">
       <app-register
         (cancelRegister)="cancelRegisterMode($event)"
       ></app-register>
@@ -40,7 +39,7 @@
 </div>
 <div *ngIf="!registerMode" class="container">
   <div class="row justify-content-center">
-    <div class="col-4">
+    <div class="col-md-6">
       <app-login
       ></app-login>
     </div>

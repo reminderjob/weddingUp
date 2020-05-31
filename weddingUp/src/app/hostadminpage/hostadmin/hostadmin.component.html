@@ -1,3 +1,10 @@
-{{ host.id}}
-{{ host.name}}
-{{ host.BudgetAmount}}
+<app-hostnav (tabMode)="currentActiveTab($event)"></app-hostnav>
+<div *ngIf="activeTab === 'DashBoard'">
+<p>{{ host.id}}</p>
+<p>{{ host.name}}</p>
+<p>{{ host.BudgetAmount}}</p>
+</div>
+
+<div *ngIf="activeTab === 'Content'">
+    <app-content></app-content>
+</div>
